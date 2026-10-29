@@ -1,0 +1,27 @@
+CREATE DATABASE IF NOT EXISTS recipe_recommendation;
+USE recipe_recommendation;
+CREATE TABLE IF NOT EXISTS users(
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(120) NOT NULL,
+ email VARCHAR(180) UNIQUE NOT NULL,
+ password VARCHAR(255) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS recipes(
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(160) NOT NULL,
+ cuisine VARCHAR(80),
+ diet VARCHAR(50),
+ cooking_time INT,
+ difficulty VARCHAR(40),
+ ingredients TEXT,
+ instructions TEXT,
+ image VARCHAR(255)
+);
+CREATE TABLE IF NOT EXISTS favorites(
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ user_id BIGINT,
+ recipe_id BIGINT,
+ UNIQUE(user_id,recipe_id),
+ FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+ FOREIGN KEY(recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
+);

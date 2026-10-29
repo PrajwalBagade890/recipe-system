@@ -1,0 +1,1 @@
+console.log('Recommendation module loaded');
